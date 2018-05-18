@@ -1,0 +1,8 @@
+{
+  "name": "ps-elite-schedule-app",
+  "app_id": "65212f45",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
