@@ -9,8 +9,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyTeamsPage } from '../pages/my-teams/my-teams';
 import { GamePage } from '../pages/game/game';
 import { TeamDetailPage } from '../pages/team-detail/team-detail';
-import { TeamPage } from '../pages/team/team';
+import { TeamsPage } from '../pages/teams/teams';
 import { TournamentsPage } from '../pages/tournaments/tournaments';
+import { StandingsPage } from '../pages/standings/standings';
+import { TeamHomePage } from '../pages/team-home/team-home';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,10 @@ import { TournamentsPage } from '../pages/tournaments/tournaments';
 	,MyTeamsPage
 	,GamePage
 	,TeamDetailPage
-	,TeamPage
+	,TeamsPage
 	,TournamentsPage
+	,StandingsPage
+	,TeamHomePage
   ],
   imports: [
     BrowserModule,
@@ -31,8 +35,10 @@ import { TournamentsPage } from '../pages/tournaments/tournaments';
 	,MyTeamsPage
 	,GamePage
 	,TeamDetailPage
-	,TeamPage
+	,TeamsPage 
 	,TournamentsPage
+	,StandingsPage
+	,TeamHomePage
   ],
   providers: [
     StatusBar,
