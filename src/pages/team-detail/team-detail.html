@@ -14,13 +14,20 @@
 
 
 <ion-content padding>
-	<h2>Team Detail</h2>
-	<h3>Name: {{team.name}}</h3>
+
+	<h2>{{team.name}} Details</h2>
+
+	<ion-list>
+		<ion-item *ngFor="let game of gameAry"
+				(click)="onClickGame($event, game)">
+			{{game.opponent}}
+		</ion-item>
+	</ion-list>
 
 	<!-- <button (click)="goHome()" ion-button >Go Home</button> -->
 		<!-- ^^^^ here just for demo of nested stacks problem(s) -->
 
-
+	<hr />
 	Team: {{team | json}}
 
 

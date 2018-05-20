@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MyTeamsPage } from '../my-teams/my-teams';
+import { EliteApi } from '../../providers/elite-api/elite-api';
+import { GamePage } from '../game/game';
+
+import * as _ from "lodash";
 
 @Component({
   selector: 'page-team-detail',
@@ -9,19 +12,69 @@ import { MyTeamsPage } from '../my-teams/my-teams';
 export class TeamDetailPage {
 
 	public team:any = {};
+	public gameAry: any[];
+	private tourData: any;
 
   constructor(
 	  public navCtrl: NavController
 	  , public navParams: NavParams
+	  , private eliteApi: EliteApi
 	) {
-	this.team = this.navParams.data;//will be an incoming Team instance
+	// this.team = this.navParams.data;//will be an incoming Team instance
 	//this is still param 2 when using nav.push() / navCtrl.push()
 	// -OR- when when passed via the [rootParams] binding in <ion-tab> component markup
-	console.log("navParams:", this.navParams );
+	// console.log("navParams:", this.navParams );
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TeamDetailPage');
+	console.log('ionViewDidLoad TeamDetailPage');
+	this.team = this.navParams.data;
+	this.tourData = this.eliteApi.getCurrentTour();
+	console.log('ionViewDidLoad() got tourData:', this.tourData );
+	this.gameAry = _.chain( this.tourData.games )
+					.filter( g => this.team.id == g.team1Id || this.team.id == g.team2Id )
+					.map( g => {
+						let isUs		= this.team.id == g.team1Id
+						,opponentName	= isUs ? g.team2 : g.team1
+						,scoreDisplay	= this.getScoreDisplay( isUs, g.team1Score, g.team2Score );
+
+						return {
+							gameId			: g.id
+							,opponent		: opponentName
+							,time			: Date.parse(g.time)
+							,location		: g.location
+							,locationUri	: g.locationUrl
+							,scoreDisplay	: scoreDisplay
+							,homeAway		: isUs ? "vs" : "at"
+						}
+					})
+					.value()
+	;
+  }
+
+  getScoreDisplay( isUs, team1Score, team2Score ){
+	  if( team1Score && team2Score ){
+		  let scoreUs	= isUs ? team1Score : team2Score
+		  , scoreThem	= isUs ? team2Score : team1Score
+		  , winMark		= scoreUs > scoreThem ? "W" : "L"
+		  ;
+		  return `${winMark}: ${scoreUs} - ${scoreThem}`;
+	  }
+	  else {
+		  return "(incomplete)";
+	  }
+  }
+
+  onClickGame($event, game){
+	console.log('onClickGame() got tourData:', this.tourData, `, Game Clicked: `, game );
+	let sourceGame = this.tourData.games.find( g => g.id === game.gameId );
+	// let sourceGame = this.gameAry.find( g => g.id === game.gameId );
+	//the games have been reduced already, but the objects have been coerced into 'other' objects
+	//I could probably add the needed data to skip searching the entire game set
+	//, but I don't know for sure where he's going with the objective
+	console.log('onClickGame() found source game:', sourceGame );
+	  this.navCtrl.parent.parent.push( GamePage, sourceGame );
+	  //get root reference before adding to the stack
   }
 
 //   goHome(){//for demonstration of nested stack problems
