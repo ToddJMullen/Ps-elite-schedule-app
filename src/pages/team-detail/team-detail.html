@@ -53,6 +53,9 @@
 				</ion-col>
 				<ion-col col-3>
 					<h4>{{game.scoreDisplay}}</h4>
+					<!-- [color]="getColorNoun(game)" his method, uses color names, I don't like -->
+					<ion-badge [class]="getWorLBadgeClass(game)"
+								ion-right >{{getScoreWorL(game)}}</ion-badge>
 				</ion-col>
 			</ion-row>
 		</ion-item>

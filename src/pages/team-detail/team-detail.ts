@@ -87,6 +87,22 @@ export class TeamDetailPage {
 	  }
   }
 
+  getScoreWorL( game ){
+	  return game.scoreDisplay ? game.scoreDisplay[0] : "";
+  }
+
+  getWorLBadgeClass( game ){
+	  let cl = `game${this.getScoreWorL( game )}`;
+	  console.log("getWorLBadgeClass() returning:", cl );
+	  return cl
+  }
+
+  getColorNoun( game ){
+	  let cl = game.scoreDisplay.indexOf("W") > -1 ? "primary" : "danger"
+	  console.log("getColorNoun() returning:", cl );
+	  return cl;
+  }
+
   onClickGame($event, game){
 	console.log('onClickGame() got tourData:', this.tourData, `, Game Clicked: `, game );
 	let sourceGame = this.tourData.games.find( g => g.id === game.gameId );
