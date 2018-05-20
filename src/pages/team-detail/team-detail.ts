@@ -4,6 +4,7 @@ import { EliteApi } from '../../providers/elite-api/elite-api';
 import { GamePage } from '../game/game';
 
 import * as _ from "lodash";
+import moment from "moment";
 
 @Component({
   selector: 'page-team-detail',
@@ -15,6 +16,8 @@ export class TeamDetailPage {
 	public gameAry: any[];
 	public teamStanding: any = {};
 	private tourData: any;
+	public dateFilter:string;
+	public allGames: any[];
 
   constructor(
 	  public navCtrl: NavController
@@ -37,12 +40,15 @@ export class TeamDetailPage {
 					.map( g => {
 						let isUs		= this.team.id == g.team1Id
 						,opponentName	= isUs ? g.team2 : g.team1
-						,scoreDisplay	= this.getScoreDisplay( isUs, g.team1Score, g.team2Score );
+						,scoreDisplay	= this.getScoreDisplay( isUs, g.team1Score, g.team2Score )
+						,rDate			= new Date(g.time);
+
+						rDate.setDate( rDate.getDate() + Math.round( 3 * Math.random()) )
 
 						return {
 							gameId			: g.id
 							,opponent		: opponentName
-							,time			: Date.parse(g.time)
+							,time			: rDate.getTime()
 							,location		: g.location
 							,locationUri	: g.locationUrl
 							,scoreDisplay	: scoreDisplay
@@ -50,10 +56,15 @@ export class TeamDetailPage {
 						}
 					})
 					.value();
-
+		this.allGames = this.gameAry;
 		this.teamStanding = _.find( this.tourData.standings, {"teamId": this.team.id});
 		console.log("team standing:", this.teamStanding );
 	;
+  }
+
+  dateChanged(){
+	  this.gameAry = _.filter( this.allGames, g => moment(g.time).isSame( this.dateFilter, "day") );
+	  console.log("dateChanged()", this.dateFilter, this.gameAry );
   }
 
   getScoreDisplay( isUs, team1Score, team2Score ){
