@@ -18,6 +18,7 @@ export class TeamDetailPage {
 	private tourData: any;
 	public dateFilter:string;
 	public allGames: any[];
+	public useDateFilter:boolean = false;
 
   constructor(
 	  public navCtrl: NavController
@@ -63,9 +64,15 @@ export class TeamDetailPage {
   }
 
   dateChanged(){
-	  this.gameAry = _.filter( this.allGames, g => moment(g.time).isSame( this.dateFilter, "day") );
-	  console.log("dateChanged()", this.dateFilter, this.gameAry );
+	if( !this.useDateFilter ){
+		this.gameAry = this.allGames;
+	}
+	else {
+		this.gameAry = _.filter( this.allGames, g => moment(g.time).isSame( this.dateFilter, "day") );
+	}
+	console.log("dateChanged()", this.dateFilter, this.gameAry );
   }
+
 
   getScoreDisplay( isUs, team1Score, team2Score ){
 	  if( team1Score && team2Score ){
