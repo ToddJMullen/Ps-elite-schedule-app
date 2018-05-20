@@ -14,11 +14,21 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-	<p>You are not currently following any teams</p>
-	<p>First select a tournament, the you can follow teams from their team page.</p>
+	<!-- <p>You are not currently following any teams</p>
+	<p>First select a tournament, the you can follow teams from their team page.</p> -->
+
+	<ion-list>
+		<ion-list-header>Followed Teams</ion-list-header>
+		<button *ngFor="let fav of favoriteAry" ion-item
+				(click)="onClickFavorite($event, fav)">
+			<ion-icon name="star"></ion-icon>
+			{{fav.team.name}}
+			<p>{{fav.tournamentName}}</p>
+		</button>
+	</ion-list>
 
 	<button ion-button full (click)="goToTournament()" >Find A Tournament</button>
-	
+
 </ion-content>
