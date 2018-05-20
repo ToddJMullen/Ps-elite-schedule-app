@@ -20,12 +20,20 @@
 	<ion-card>
 		<ion-card-content>
 			<ion-row>
-				<ion-col>
+				<ion-col col-6>
 					<h2>Record: {{teamStanding.wins}} - {{teamStanding.losses}}</h2>
 					<p>Coach: {{team.coach}}</p>
 				</ion-col>
-				<ion-col>
-
+				<ion-col col-6 text-right>
+					<button (click)="toggleFav()" *ngIf="!isFollowing"
+								ion-button icon-left outline>
+						<ion-icon name="star"></ion-icon>
+						Add Favorite
+					</button>
+					<button (click)="toggleFav()" *ngIf="isFollowing"
+								ion-button icon-only outline>
+						<ion-icon name="star"></ion-icon>
+					</button>
 				</ion-col>
 			</ion-row>
 			<ion-item>

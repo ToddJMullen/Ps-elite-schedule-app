@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { EliteApi } from '../../providers/elite-api/elite-api';
 import { GamePage } from '../game/game';
 
@@ -19,11 +19,13 @@ export class TeamDetailPage {
 	public dateFilter:string;
 	public allGames: any[];
 	public useDateFilter:boolean = false;
+	public isFollowing:boolean = false;
 
   constructor(
 	  public navCtrl: NavController
 	  , public navParams: NavParams
 	  , private eliteApi: EliteApi
+	  ,private alert: AlertController
 	) {
 	// this.team = this.navParams.data;//will be an incoming Team instance
 	//this is still param 2 when using nav.push() / navCtrl.push()
@@ -101,6 +103,28 @@ export class TeamDetailPage {
 	  let cl = game.scoreDisplay.indexOf("W") > -1 ? "primary" : "danger"
 	  console.log("getColorNoun() returning:", cl );
 	  return cl;
+  }
+
+  toggleFav(){
+		// console.log("toggleFav()" );
+		if( !this.isFollowing ){
+			this.isFollowing = true;
+		}
+		else{
+			let confirm = this.alert.create({
+				title: "Unfollow?"
+				,message: "Are you sure you want to unfollow?"
+				,buttons: [{
+					text: "Yes"
+					,handler: () => {
+						this.isFollowing = false;
+					}
+				},{
+					text: "No"
+				}]
+			});
+			confirm.present();
+		}
   }
 
   onClickGame($event, game){
