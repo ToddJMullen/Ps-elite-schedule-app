@@ -13,6 +13,7 @@ import { TeamsPage } from '../pages/teams/teams';
 import { TournamentsPage } from '../pages/tournaments/tournaments';
 import { StandingsPage } from '../pages/standings/standings';
 import { TeamHomePage } from '../pages/team-home/team-home';
+import { EliteApiProvider } from '../providers/elite-api/elite-api';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TeamHomePage } from '../pages/team-home/team-home';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    EliteApiProvider
   ]
 })
 export class AppModule {}
