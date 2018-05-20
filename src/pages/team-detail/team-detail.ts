@@ -7,13 +7,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class TeamDetailPage {
 
-	public team:any = {};
+	// public team:any = {};
 
   constructor(
 	  public navCtrl: NavController
 	  , public navParams: NavParams
 	) {
-	this.team = this.navParams.data;//will be an incoming Team instance
+	// this.team = this.navParams.data;//will be an incoming Team instance
 	console.log("navParams:", this.navParams );
   }
 

@@ -1,12 +1,23 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{team.name}}</ion-title>
-  </ion-navbar>
-
-</ion-header>
+<ion-navbar>
+	<ion-title>
+		<!-- This is left as a vertical placeholder bc this navbar is hidden by the TeamHome page
+		navbar because this page is a sub-tab of it.
+		If the header is removed, the tab's content shift up to fill the space & will also be hidden.
+		This is only really needed when using tabs on a non-root page.
+	 -->
+	</ion-title>
+</ion-navbar>
+	  
+	  </ion-header>
 
 
 <ion-content padding>
-	Team: {{team | json}}
+	<h2>Team Detail</h2>
+	<!-- <h3>Name: {{team.name}}</h3> -->
+
+	<!-- Team: {{team | json}} -->
+
+
 </ion-content>
