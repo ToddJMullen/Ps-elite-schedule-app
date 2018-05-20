@@ -13,6 +13,7 @@ export class TeamDetailPage {
 
 	public team:any = {};
 	public gameAry: any[];
+	public teamStanding: any = {};
 	private tourData: any;
 
   constructor(
@@ -48,7 +49,10 @@ export class TeamDetailPage {
 							,homeAway		: isUs ? "vs" : "at"
 						}
 					})
-					.value()
+					.value();
+
+		this.teamStanding = _.find( this.tourData.standings, {"teamId": this.team.id});
+		console.log("team standing:", this.teamStanding );
 	;
   }
 
