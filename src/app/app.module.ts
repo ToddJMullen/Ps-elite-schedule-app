@@ -13,7 +13,7 @@ import { TeamsPage } from '../pages/teams/teams';
 import { TournamentsPage } from '../pages/tournaments/tournaments';
 import { StandingsPage } from '../pages/standings/standings';
 import { TeamHomePage } from '../pages/team-home/team-home';
-import { EliteApiProvider } from '../providers/elite-api/elite-api';
+import { EliteApi } from '../providers/elite-api/elite-api';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { EliteApiProvider } from '../providers/elite-api/elite-api';
 	,MyTeamsPage
 	,GamePage
 	,TeamDetailPage
-	,TeamsPage 
+	,TeamsPage
 	,TournamentsPage
 	,StandingsPage
 	,TeamHomePage
@@ -45,7 +45,7 @@ import { EliteApiProvider } from '../providers/elite-api/elite-api';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    EliteApiProvider
+    EliteApi
   ]
 })
 export class AppModule {}
