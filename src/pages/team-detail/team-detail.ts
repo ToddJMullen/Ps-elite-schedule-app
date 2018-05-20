@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { EliteApi } from '../../providers/elite-api/elite-api';
 import { GamePage } from '../game/game';
 
@@ -26,6 +26,7 @@ export class TeamDetailPage {
 	  , public navParams: NavParams
 	  , private eliteApi: EliteApi
 	  ,private alert: AlertController
+	  ,private toast: ToastController
 	) {
 	// this.team = this.navParams.data;//will be an incoming Team instance
 	//this is still param 2 when using nav.push() / navCtrl.push()
@@ -118,6 +119,12 @@ export class TeamDetailPage {
 					text: "Yes"
 					,handler: () => {
 						this.isFollowing = false;
+						let msg = this.toast.create({
+							message: `No longer following ${this.team.name}`
+							,duration: 2500
+							,position: "bottom"
+						});
+						msg.present();
 					}
 				},{
 					text: "No"
