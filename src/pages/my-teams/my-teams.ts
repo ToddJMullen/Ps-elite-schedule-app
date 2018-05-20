@@ -10,7 +10,7 @@ import { TeamHomePage } from '../team-home/team-home';
 })
 export class MyTeamsPage {
 
-	favoriteAry	= [
+	public favoriteAry	= [
 		{
 			team: {id: 234, name: "Boo 7", coach: "Michelotti"}
 			,tournamentId: "3dd50aaf-6b03-4497-b074-d81703f07ee8"

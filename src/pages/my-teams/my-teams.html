@@ -16,27 +16,43 @@
 
 <ion-content>
 
-	<!-- <p>You are not currently following any teams</p>
-	<p>First select a tournament, the you can follow teams from their team page.</p> -->
+	<ion-card *ngIf="!favoriteAry">
+		<ion-card-header class="my-teams-header">No Followed Teams</ion-card-header>
+		<ion-card-content>
+			<p>You are not currently following any teams</p>
+			<p>First select a tournament, the you can follow teams from their team page.</p>
+			<button (click)="goToTournament()" ion-button full icon-right >
+				Find A Tournament
+				<ion-icon name="search"></ion-icon>
+			</button>
+		</ion-card-content>
+	</ion-card>
 
-	<ion-list>
-		<ion-list-header>Followed Teams</ion-list-header>
-		<button *ngFor="let fav of favoriteAry" ion-item
-				(click)="onClickFavorite($event, fav)">
-			<ion-icon name="star"></ion-icon>
-			{{fav.team.name}}
-			<p>{{fav.tournamentName}}</p>
-		</button>
-	</ion-list>
+	<ion-card *ngIf="favoriteAry">
+		<ion-card-header class="my-teams-header">Followed Teams</ion-card-header>
+		<ion-card-content>
+			<ion-list>
+				<!-- <ion-list-header>Followed Teams</ion-list-header> -->
+				<button *ngFor="let fav of favoriteAry" ion-item
+					(click)="onClickFavorite($event, fav)">
+					<ion-icon name="star"></ion-icon>
+					{{fav.team.name}}
+					<p>{{fav.tournamentName}}</p>
+				</button>
+			</ion-list>
+			<p>To follow more teams find a Tournament and you can follow the teams from their team page.</p>
+			<!-- <button ion-button round outline (click)="goToTournament()" >Find A Tournament</button>
+				<button ion-button round clear (click)="goToTournament()" >Find A Tournament</button>
+				<button ion-button round small (click)="goToTournament()" >Find A Tournament</button>
+				<button ion-button small full (click)="goToTournament()" >Find A Tournament</button> -->
+				<button (click)="goToTournament()" ion-button full icon-right >
+				Find A Tournament
+				<ion-icon name="search"></ion-icon>
+			</button>
+		</ion-card-content>
+	</ion-card>
 
-	<!-- <button ion-button round outline (click)="goToTournament()" >Find A Tournament</button>
-	<button ion-button round clear (click)="goToTournament()" >Find A Tournament</button>
-	<button ion-button round small (click)="goToTournament()" >Find A Tournament</button>
-	<button ion-button small full (click)="goToTournament()" >Find A Tournament</button> -->
-	<button ion-button full icon-right round (click)="goToTournament()" >
-		Find A Tournament
-		<ion-icon name="search"></ion-icon>
-	</button>
+
 
 
 </ion-content>
