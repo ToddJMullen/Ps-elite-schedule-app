@@ -5,6 +5,7 @@ import { GamePage } from '../game/game';
 
 import * as _ from "lodash";
 import moment from "moment";
+import { UserSettings } from '../../providers/user-settings/user-settings';
 
 @Component({
   selector: 'page-team-detail',
@@ -27,6 +28,7 @@ export class TeamDetailPage {
 	  , private eliteApi: EliteApi
 	  ,private alert: AlertController
 	  ,private toast: ToastController
+	  ,private userSettings: UserSettings
 	) {
 	// this.team = this.navParams.data;//will be an incoming Team instance
 	//this is still param 2 when using nav.push() / navCtrl.push()
@@ -62,6 +64,7 @@ export class TeamDetailPage {
 					.value();
 		this.allGames = this.gameAry;
 		this.teamStanding = _.find( this.tourData.standings, {"teamId": this.team.id});
+		this.userSettings.isFavoriteTeam( this.team.id ).then( bool => this.isFollowing = bool );
 		console.log("team standing:", this.teamStanding );
 	;
   }
@@ -110,6 +113,8 @@ export class TeamDetailPage {
 		// console.log("toggleFav()" );
 		if( !this.isFollowing ){
 			this.isFollowing = true;
+			this.userSettings
+				.favoriteTeam( this.team, this.tourData.tournament.id, this.tourData.tournament.name );
 		}
 		else{
 			let confirm = this.alert.create({
@@ -118,6 +123,7 @@ export class TeamDetailPage {
 				,buttons: [{
 					text: "Yes"
 					,handler: () => {
+						this.userSettings.unfavoriteTeam( this.team );
 						this.isFollowing = false;
 						let msg = this.toast.create({
 							message: `No longer following ${this.team.name}`
