@@ -13,7 +13,12 @@
 	  <ion-list-header>Navigate</ion-list-header>
 	  <button menuClose ion-item (click)="goHome()">Home</button>
 	  <button menuClose ion-item (click)="goToTournament()">Find A Tournament</button>
-    </ion-list>
+	</ion-list>
+	<ion-list>
+		<ion-list-header>Favorites</ion-list-header>
+		<button *ngFor="let fav of favoriteTeams" menuClose ion-item
+				(click)="goToTeam(fav)">{{fav.team.name}}</button>
+	</ion-list>
   </ion-content>
 
 </ion-menu>
