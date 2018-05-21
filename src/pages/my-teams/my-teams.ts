@@ -24,21 +24,22 @@ export class MyTeamsPage {
 
   ionViewDidEnter(){//runs every time shown
 	  this.favoriteAry = this.userSettings.getAllFavorites()
-  }
+	}
 
-  ionViewDidLoad() {//runs only on load
-    console.log('ionViewDidLoad MyTeamsPage');
-  }
+	ionViewDidLoad() {//runs only on load
+		console.log('ionViewDidLoad MyTeamsPage');
+	}
 
-  goToTournament(){
-	  this.navCtrl.push( TournamentsPage );
-  }
+	goToTournament(){
+		this.navCtrl.push( TournamentsPage );
+	}
 
-  onClickFavorite( $event, fav ){
-	let loader = this.loadingController.create({
-		content: "Getting Data..."
-		,dismissOnPageChange: true
-	});
+	onClickFavorite( $event, fav ){
+		console.log("clicked fav:", fav );
+		let loader = this.loadingController.create({
+			content: "Getting Data..."
+			,dismissOnPageChange: true
+		});
 	loader.present();
 	this.eliteApi.getTournamentData( fav.tournamentId )
 		.subscribe( t => this.navCtrl.push( TeamHomePage, fav.team ))

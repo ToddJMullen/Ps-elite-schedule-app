@@ -19,14 +19,20 @@ export class TeamHomePage {
 
   constructor(
 	  public navCtrl: NavController
-	  , public navParams: NavParams) {
+	  , public navParams: NavParams
+	) {
 
 		this.team = this.navParams.data;
-  }
+	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TeamHomePage');
-  }
+	// ionViewWillEnter(){
+	// 	console.log('ionViewWillEnter TeamHomePage');
+	// 	this.team = this.navParams.data;
+	// }
+
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad TeamHomePage:', this.team );
+	}
 
   goHome(){
 	//this.navCtrl.push( MyTeamsPage );

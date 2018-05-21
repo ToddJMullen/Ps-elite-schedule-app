@@ -23,8 +23,8 @@ export class TeamsPage {
   }
 
   ionViewDidLoad() {
-	console.log('ionViewDidLoad TeamPage');
-	let selectedTour = this.navParams.data;
+	  let selectedTour = this.navParams.data;
+	  console.log('ionViewDidLoad TeamPage, tour:', selectedTour );
 	let loader = this.loadingController.create({
 		content: "Loading Data..."
 	});
@@ -39,6 +39,7 @@ export class TeamsPage {
 			.value();
 			this.teams = this.allTeamDivisions;
 			console.log("All teams division:", this.allTeamDivisions );
+			console.log("All teams:", this.allTeams );
 		});
 		loader.dismiss();
 	});
