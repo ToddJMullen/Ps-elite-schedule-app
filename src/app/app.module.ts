@@ -34,7 +34,7 @@ import { UserSettings } from '../providers/user-settings/user-settings';
     BrowserModule,
 	IonicModule.forRoot(MyApp)
 	,HttpModule
-	,IonicStorageModule
+	,IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
