@@ -20,5 +20,12 @@ export class UserSettings {
 		return this.storage.get( teamId ).then( t => t ? true: false );
 	}
 
+	getAllFavorites(){
+		let favAry = [];
+		this.storage.forEach( team => {
+			favAry.push( JSON.parse(team) );
+		});
+		return favAry;
+	}
 
 }
