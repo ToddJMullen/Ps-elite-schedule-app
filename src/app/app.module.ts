@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicStorageModule } from "@ionic/storage";
 import { HttpModule } from "@angular/http";
 
 
@@ -32,6 +33,7 @@ import { EliteApi } from '../providers/elite-api/elite-api';
     BrowserModule,
 	IonicModule.forRoot(MyApp)
 	,HttpModule
+	,IonicStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
