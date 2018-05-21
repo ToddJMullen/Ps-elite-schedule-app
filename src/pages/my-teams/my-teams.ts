@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TournamentsPage } from '../tournaments/tournaments';
 import { EliteApi } from '../../providers/elite-api/elite-api';
 import { TeamHomePage } from '../team-home/team-home';
+import { UserSettings } from '../../providers/user-settings/user-settings';
 
 @Component({
   selector: 'page-my-teams',
@@ -10,29 +11,22 @@ import { TeamHomePage } from '../team-home/team-home';
 })
 export class MyTeamsPage {
 
-	public favoriteAry	= [
-		{
-			team: {id: 234, name: "Boo 7", coach: "Michelotti"}
-			,tournamentId: "3dd50aaf-6b03-4497-b074-d81703f07ee8"
-			,tournamentName: "March Madness Tournament"
-		}
-		,
-		{
-			team: {id: 456, name: "dfg 7", coach: "Michelotti"}
-			,tournamentId: "89e13aa2-ba6d-4f55-9cc2-61eba6172c63"
-			,tournamentName: "April Madness Tournament"
-		}
-	]
+	public favoriteAry	= [];
 
   constructor(
 	  public navCtrl: NavController
 	  ,public navParams: NavParams
 	  ,private loadingController: LoadingController
 	  ,private eliteApi: EliteApi
+	  ,private userSettings: UserSettings
 	) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter(){//runs every time shown
+	  this.favoriteAry = this.userSettings.getAllFavorites()
+  }
+
+  ionViewDidLoad() {//runs only on load
     console.log('ionViewDidLoad MyTeamsPage');
   }
 
