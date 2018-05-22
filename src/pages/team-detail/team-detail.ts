@@ -69,6 +69,14 @@ export class TeamDetailPage {
 	;
   }
 
+	refreshAll( refresher ){
+		this.eliteApi.refreshCurrentTournament().subscribe( () => {
+			refresher.complete();
+			this.ionViewDidLoad();
+		})
+	}
+
+
   dateChanged(){
 	if( !this.useDateFilter ){
 		this.gameAry = this.allGames;
@@ -98,8 +106,9 @@ export class TeamDetailPage {
   }
 
   getWorLBadgeClass( game ){
+	  //TODO this function is called way too many times
 	  let cl = `game${this.getScoreWorL( game )}`;
-	  console.log("getWorLBadgeClass() returning:", cl );
+	//   console.log("getWorLBadgeClass() returning:", cl );
 	  return cl
   }
 
