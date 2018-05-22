@@ -1,15 +1,17 @@
 // import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';//includes json()
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import "rxjs/add/operator/map";
-import { Observable } from 'rxjs/Observable';
+import "rxjs/add/observable/of";
 
 @Injectable()
 export class EliteApi {
 
 	private baseUri:string	= "https://elite-schedule-app-i3-37c3e.firebaseio.com";
 	private currentTour:any	= {};
+	private tournamentData: any = {};
 
   constructor(
 	  public http: Http
@@ -25,15 +27,39 @@ export class EliteApi {
 	  });
   }
 
-
-  //using rxjs /preferred method
-  getTournamentData( tourId ): Observable<any>{
-	return this.http.get(`${this.baseUri}/tournaments-data/${tourId}.json`)
-			.map( rsp => {
-				this.currentTour = rsp.json();
-				return this.currentTour;
-			})
+  refreshCurrentTournament(){
+	  if( !this.getCurrentTour() ){
+		  console.error("No tournament data selected");
+		  return;
+	  }
+	return this.getTournamentData( this.currentTour.tournament.id, true );
   }
+
+	getTournamentData( tourId, forceRefresh:boolean = false ){
+		if( !forceRefresh && this.tournamentData[tourId] ){
+			this.currentTour = this.tournamentData[tourId];
+			console.log("We already have the data & this isn't a 'force refresh' so just return it")
+			return Observable.of(this.currentTour);
+		}
+
+		console.log("We dont have the data or is a forced refresh")
+		return this.http.get(`${this.baseUri}/tournaments-data/${tourId}.json`)
+			.map( rsp => {
+				this.tournamentData[ tourId ] = rsp.json();
+				this.currentTour = this.tournamentData[ tourId ];
+				return this.currentTour;
+		});
+	}
+
+  //deprecated in s7.4 - "Refresher"
+//using rxjs /preferred method
+//   getTournamentData( tourId ): Observable<any>{
+// 	return this.http.get(`${this.baseUri}/tournaments-data/${tourId}.json`)
+// 			.map( rsp => {
+// 				this.currentTour = rsp.json();
+// 				return this.currentTour;
+// 			})
+//   }
 
 
 	getCurrentTour(): any {
