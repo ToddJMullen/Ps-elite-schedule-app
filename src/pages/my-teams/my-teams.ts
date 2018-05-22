@@ -41,7 +41,7 @@ export class MyTeamsPage {
 			,dismissOnPageChange: true
 		});
 	loader.present();
-	this.eliteApi.getTournamentData( fav.tournamentId )
+	this.eliteApi.getTournamentData( fav.tourId )
 		.subscribe( t => this.navCtrl.push( TeamHomePage, fav.team ))
   }
 
