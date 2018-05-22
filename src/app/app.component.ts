@@ -63,8 +63,9 @@ export class MyApp {
 		  ,dismissOnPageChange: true
 	  });
 	  loader.present();
+	  console.log("goToTeam()", fav );
 	  this.eliteApi.getTournamentData(fav.tourId)
-	  				.subscribe( tour => this.nav.push( TeamHomePage, fav ) )
+	  				.subscribe( tour => this.nav.push( TeamHomePage, fav.team ) )
   }
 
 
