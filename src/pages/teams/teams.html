@@ -1,15 +1,37 @@
 <ion-header>
 
   <ion-navbar color="primary">
+	  <ion-row>
+<!--		  <ion-col col-3>
     <ion-title>Teams</ion-title>
+
+		  </ion-col>
+		  <ion-col col-9>-->
+<!--the columns work, but smash the title, will find out how to make minimal size & expand on focus-->
+	<ion-searchbar placeholder="Search"
+				   [(ngModel)]="searchText" (ionInput)="filterTeams()"></ion-searchbar>
+		  <!--</ion-col>-->
+	  </ion-row>
   </ion-navbar>
+
+<!--	<ion-toolbar>
+	</ion-toolbar>-->
 
 </ion-header>
 
 
 <ion-content padding>
 		<ion-item-group *ngFor="let div of teams">
-			<ion-item-divider color="secondary">{{div.divisionName}}</ion-item-divider>
+			<ion-item-divider color="secondary">
+				<ion-row>
+					<ion-col col-9>
+						{{div.divisionName}}
+					</ion-col>
+					<ion-col col-3 text-right>
+						({{div.divisionTeams.length}})
+					</ion-col>
+				</ion-row>
+			</ion-item-divider>
 			<button *ngFor="let team of div.divisionTeams"
 					(click)="itemTapped( $event, team )" ion-item>
 				{{team.name}}

@@ -11,6 +11,8 @@ import * as _ from "lodash";
 export class TeamsPage {
 
 	public teams = [];
+	public searchText:string;
+
 	private allTeams:any;
 	private allTeamDivisions:any;
 
@@ -47,6 +49,23 @@ export class TeamsPage {
 
   itemTapped( $event, team ){
 	this.navCtrl.push( TeamHomePage, team );
+  }
+
+  filterTeams(){
+	  let query:string			= this.searchText.toLowerCase()
+	  ,filteredTeams:any[]		= []
+	  ;
+
+	  _.forEach( this.allTeamDivisions, div => {
+		 console.log("filterTeams() div teams, before:", divTeams );
+		 let divTeams = _.filter( div.divisionTeams, t => (<any>t).name.toLowerCase().includes(query) );
+		 console.log("filterTeams() div teams, after:", divTeams );
+		 if( divTeams.length > 0 ){
+			 filteredTeams.push({divisionName: div.divisionName, divisionTeams: divTeams});
+		 }
+	  });
+	  console.log("filterTeams() filtered:", filteredTeams );
+	  this.teams = filteredTeams;
   }
 
 }
