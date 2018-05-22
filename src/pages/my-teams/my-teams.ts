@@ -40,9 +40,9 @@ export class MyTeamsPage {
 			content: "Getting Data..."
 			,dismissOnPageChange: true
 		});
-	loader.present();
-	this.eliteApi.getTournamentData( fav.tourId )
-		.subscribe( t => this.navCtrl.push( TeamHomePage, fav.team ))
+		loader.present();
+		this.eliteApi.getTournamentData( fav.tourId )
+			.subscribe( t => this.navCtrl.push( TeamHomePage, fav.team ))
   }
 
 }

@@ -9,9 +9,11 @@ export class UserSettings {
   }
 
 	favoriteTeam( team, tourId, tourName ){
-		let item = { team, tourId, tourName }
-		this.storage.set( team.id.toString(), JSON.stringify(item) );
+		let fav = { team, tourId, tourName }
+		console.log("favoriteTeam() saving:", fav );
+		this.storage.set( team.id.toString(), JSON.stringify(fav) );
 	}
+
 	unfavoriteTeam( team ){
 	  this.storage.remove( team.id.toString() );
 	}

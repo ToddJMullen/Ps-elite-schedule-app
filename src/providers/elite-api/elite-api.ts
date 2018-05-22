@@ -13,27 +13,27 @@ export class EliteApi {
 	private currentTour:any	= {};
 	private tournamentData: any = {};
 
-  constructor(
-	  public http: Http
+	constructor(
+		public http: Http
 	) {
 	// console.log('Hello EliteApiProvider Provider');
-  }
+	}
 
-  //using Promises
-  getTournaments(){
-	  return new Promise( resolve => {
-		  this.http.get(`${this.baseUri}/tournaments.json`)
+	//using Promises
+	getTournaments(){
+		return new Promise( resolve => {
+			this.http.get(`${this.baseUri}/tournaments.json`)
 				.subscribe( rsp => resolve( rsp.json() ) );
-	  });
-  }
+		});
+	}
 
-  refreshCurrentTournament(){
-	  if( !this.getCurrentTour() ){
-		  console.error("No tournament data selected");
-		  return;
-	  }
+	refreshCurrentTournament(){
+		if( !this.getCurrentTour() ){
+			console.error("No tournament data selected");
+			return;
+		}
 	return this.getTournamentData( this.currentTour.tournament.id, true );
-  }
+	}
 
 	getTournamentData( tourId, forceRefresh:boolean = false ){
 		if( !forceRefresh && this.tournamentData[tourId] ){
@@ -42,7 +42,8 @@ export class EliteApi {
 			return Observable.of(this.currentTour);
 		}
 
-		console.log("We dont have the data or is a forced refresh")
+		console.log(`We dont have the tour "${tourId}" data or is a forced refresh`, forceRefresh
+			, "cached:", this.tournamentData );
 		return this.http.get(`${this.baseUri}/tournaments-data/${tourId}.json`)
 			.map( rsp => {
 				this.tournamentData[ tourId ] = rsp.json();
