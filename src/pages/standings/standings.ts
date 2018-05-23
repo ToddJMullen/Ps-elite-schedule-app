@@ -28,13 +28,24 @@ export class StandingsPage {
 		this.team = this.navParams.data;
 		let tour = this.eliteApi.getCurrentTour();
 		this.standings = tour.standings;
-		this.allStandings = _.chain( this.standings )
-								.groupBy("division")
-								.toPairs()
-								.map( game => _.zipObject(["divisionName","divisionStandings"], game ))
-								.value();
+//		this.allStandings = _.chain( this.standings )
+//								.groupBy("division")
+//								.toPairs()
+//								.map( game => _.zipObject(["divisionName","divisionStandings"], game ))
+//								.value();
+		this.allStandings = tour.standings;
 		console.log("Standings:", this.standings );
 		console.log("All Standings:", this.allStandings );
   }
+
+	getHeaderFn( record, recordIdx, allRecordAry ):void{
+		console.log("getHeaderFn(), returning scroll header for:", record );
+
+		if( recordIdx == 0 || record.division != allRecordAry[recordIdx - 1].division ){
+			return record.division;
+		}
+		return null;
+	}//getHeaderFn
+
 
 }

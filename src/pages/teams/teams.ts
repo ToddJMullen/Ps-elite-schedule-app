@@ -57,7 +57,6 @@ export class TeamsPage {
 	  ;
 
 	  _.forEach( this.allTeamDivisions, div => {
-		 console.log("filterTeams() div teams, before:", divTeams );
 		 let divTeams = _.filter( div.divisionTeams, t => (<any>t).name.toLowerCase().includes(query) );
 		 console.log("filterTeams() div teams, after:", divTeams );
 		 if( divTeams.length > 0 ){
