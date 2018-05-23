@@ -10,6 +10,15 @@
 	</ion-title>
   </ion-navbar>
 
+  <ion-toolbar>
+	  <ion-segment color="secondary" [(ngModel)]="divisionFilter" (ionChange)="filterDivision($event)" >
+		  <ion-segment-button value="division">
+			  Division</ion-segment-button>
+		  <ion-segment-button value="all">
+			  All</ion-segment-button>
+	  </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
 

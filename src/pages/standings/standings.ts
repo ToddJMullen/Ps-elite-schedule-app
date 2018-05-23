@@ -12,7 +12,7 @@ export class StandingsPage {
 
 	public allStandings: any[];
 	public standings: any[];
-
+	public divisionFilter:string = "division";
 	public team:any		= {};
 
   constructor(
@@ -27,13 +27,14 @@ export class StandingsPage {
 		console.log('ionViewDidLoad StandingsPage');
 		this.team = this.navParams.data;
 		let tour = this.eliteApi.getCurrentTour();
-		this.standings = tour.standings;
+//		this.standings = tour.standings;
+		this.allStandings = tour.standings;
+		this.filterDivision();//populates the appropriate standings on load / replaces above & below
 //		this.allStandings = _.chain( this.standings )
 //								.groupBy("division")
 //								.toPairs()
 //								.map( game => _.zipObject(["divisionName","divisionStandings"], game ))
 //								.value();
-		this.allStandings = tour.standings;
 		console.log("Standings:", this.standings );
 		console.log("All Standings:", this.allStandings );
   }
@@ -46,6 +47,18 @@ export class StandingsPage {
 		}
 		return null;
 	}//getHeaderFn
+
+
+
+	filterDivision(){
+		if( this.divisionFilter == "all" ){
+			this.standings = this.allStandings;
+		}
+		else {
+			this.standings = _.filter( this.allStandings, s => { return s.division == this.team.division} );
+//			this.standings = this.allStandings.filter( s => { return s.division == this.team.division} );
+		}
+	}
 
 
 }
