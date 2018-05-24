@@ -20,8 +20,10 @@ export class GamePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GamePage');
 	this.game = this.navParams.data;
+	console.log('ionViewDidLoad GamePage, game:', this.game );
+	//convert the game datetime from string
+	this.game.time = Date.parse( this.game.time );
   }
 
   onClickTeam( teamId ){
@@ -29,6 +31,18 @@ export class GamePage {
 	,team		= tour.teams.find( t => teamId === t.id )
 	;
 	this.navCtrl.push( TeamHomePage, team );
+  }
+
+  getWinnerClass( scoreUs, scoreThem ){
+	  return +scoreUs > +scoreThem ? "gameW" : "gameL";
+  }
+
+  goToMap(){
+	  console.log("goToMap()");
+  }
+
+  goToDirections(){
+	  console.log("goToDirections()")
   }
 
 }
