@@ -16,6 +16,8 @@ import { TeamsPage } from '../pages/teams/teams';
 import { TournamentsPage } from '../pages/tournaments/tournaments';
 import { StandingsPage } from '../pages/standings/standings';
 import { TeamHomePage } from '../pages/team-home/team-home';
+import { MapPage } from "../pages/map/map";
+
 import { EliteApi } from '../providers/elite-api/elite-api';
 import { UserSettings } from '../providers/user-settings/user-settings';
 
@@ -29,6 +31,7 @@ import { UserSettings } from '../providers/user-settings/user-settings';
 	,TournamentsPage
 	,StandingsPage
 	,TeamHomePage
+	,MapPage
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { UserSettings } from '../providers/user-settings/user-settings';
 	,TournamentsPage
 	,StandingsPage
 	,TeamHomePage
+	,MapPage
   ],
   providers: [
     StatusBar,
