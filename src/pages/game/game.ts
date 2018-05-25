@@ -4,6 +4,7 @@ import { EliteApi } from '../../providers/elite-api/elite-api';
 import { TeamHomePage } from '../team-home/team-home';
 import { MapPage } from '../map/map';
 
+declare var window: any;
 
 @Component({
   selector: 'page-game',
@@ -44,7 +45,11 @@ export class GamePage {
   }
 
   goToDirections(){
-	  console.log("goToDirections()")
+	  console.log("goToDirections()");
+	  let tour	= this.eliteApi.getCurrentTour()
+	  ,location	= tour.locations[ tour.locationId ]
+	  ;
+	  window.location = `geo:${location.latitude},${location.longitude};u-35`;
   }
 
 }
