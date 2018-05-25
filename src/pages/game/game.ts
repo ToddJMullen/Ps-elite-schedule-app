@@ -47,7 +47,7 @@ export class GamePage {
   goToDirections(){
 	  console.log("goToDirections()");
 	  let tour	= this.eliteApi.getCurrentTour()
-	  ,location	= tour.locations[ tour.locationId ]
+	  ,location	= tour.locations[ this.game.locationId ]
 	  ;
 	  window.location = `geo:${location.latitude},${location.longitude};u-35`;
   }

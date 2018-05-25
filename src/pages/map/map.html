@@ -10,6 +10,12 @@
 
 <ion-content>
 
+	<ion-fab left bottom >
+		<button (click)="goToDirections()" ion-fab>
+			<ion-icon name="navigate"></ion-icon>
+		</button>
+	</ion-fab>
+
 	<agm-map [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom" >
 		<agm-marker [latitude]="map.lat" [longitude]="map.lng">
 			<agm-info-window>
