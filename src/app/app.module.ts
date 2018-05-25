@@ -3,6 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from "@ionic/storage";
 import { HttpModule } from "@angular/http";
+import { AgmCoreModule } from "@agm/core";
+import * as ApiKey from "../_private/ApiKeys";
 
 
 import { MyApp } from './app.component';
@@ -38,6 +40,7 @@ import { UserSettings } from '../providers/user-settings/user-settings';
 	IonicModule.forRoot(MyApp)
 	,HttpModule
 	,IonicStorageModule.forRoot()
+	,AgmCoreModule.forRoot({apiKey: ApiKey.KEY_AGM })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -56,7 +59,7 @@ import { UserSettings } from '../providers/user-settings/user-settings';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EliteApi,
-    UserSettings
+    UserSettings,
   ]
 })
 export class AppModule {}
