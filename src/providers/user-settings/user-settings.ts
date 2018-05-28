@@ -16,17 +16,19 @@ export class UserSettings {
 	  ,private toast: ToastController
 	) {
     if( win.sqlitePlugin ){
+		console.log("Found sqlite plugin:", win.sqlitePlugin );
 		this.sqlMode = true;
-		this.pop("SQL Storage Enabled");
+		// this.pop("UserSettings() SQL Storage Enabled");
 	}
 	else {
 		this.pop(`SQLite Plugin Not Available\nFallback to Ionic Storage`);
 	}
   }
 
-  pop( msg, duration = 3000, position = "bottom" ){
+  pop( msg, duration = 0, position = "bottom" ){
 	let t = this.toast.create({
-		message: msg, duration, position
+		message: `UserSettings ${msg}`, duration, position
+		,showCloseButton: true
 	});
 	t.present();
   }
@@ -80,10 +82,13 @@ export class UserSettings {
 	}
 
 	initStorage():Promise<any>{
+		this.pop(`initStorage()`);
 		if( this.sqlMode ){
+			this.pop(`initStorage() in SQL Mode `);
 			return this.sql.initializeDb();
 		}
 		else {
+			this.pop(`initStorage() in non-SQL Mode `);
 			return new Promise( resolve => resolve() );
 		}
 	}

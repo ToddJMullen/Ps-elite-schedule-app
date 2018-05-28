@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, LoadingController } from 'ionic-angular';
+import { Nav, Platform, LoadingController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -27,24 +27,37 @@ export class MyApp {
 	  , private userSettings: UserSettings
 	  , private eliteApi: EliteApi
 	  , private loadingController: LoadingController
+	  ,private toast: ToastController
 	) {
     this.initializeApp();
 
   }
 
+  pop( msg, duration = 0, position = "bottom" ){
+	let t = this.toast.create({
+		message: `App::${msg}`, duration, position
+		,showCloseButton: true
+	});
+	t.present();
+  }
+
   initializeApp() {
+	this.pop("initializeApp()");
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
 	  // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+	  this.splashScreen.hide();
 	  this.userSettings.initStorage()
-	  	// .then( () => this.rootPage = MyTeamsPage );//don't think we need this?
+	  	.then( () => {
+			this.rootPage = MyTeamsPage
+			this.refreshFavs();//I hope this is the culprit (being outside callback / before db init)
+		});//don't think we need this?
 	});
-	this.refreshFavs();
   }
 
   refreshFavs(){
+	  this.pop("refreshFavs()");
 	  console.log("refreshFavs()")
 	//   this.favoriteTeams = this.userSettings.getAllFavorites();
 		this.userSettings.getAllFavorites().then(
