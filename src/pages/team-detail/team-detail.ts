@@ -24,8 +24,8 @@ export class TeamDetailPage {
 
   constructor(
 	  public navCtrl: NavController
-	  , public navParams: NavParams
-	  , private eliteApi: EliteApi
+	  ,public navParams: NavParams
+	  ,private eliteApi: EliteApi
 	  ,private alert: AlertController
 	  ,private toast: ToastController
 	  ,private userSettings: UserSettings

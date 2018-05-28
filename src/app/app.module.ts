@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from "@ionic/storage";
 import { HttpModule } from "@angular/http";
 import { AgmCoreModule } from "@agm/core";
+import { SQLite } from "@ionic-native/sqlite";
 import * as ApiKey from "../_private/ApiKeys";
 
 
@@ -22,6 +23,7 @@ import { MapPage } from "../pages/map/map";
 
 import { EliteApi } from '../providers/elite-api/elite-api';
 import { UserSettings } from '../providers/user-settings/user-settings';
+import { SqlStorage } from '../providers/sql-storage/sql-storage';
 
 @NgModule({
   declarations: [
@@ -57,9 +59,11 @@ import { UserSettings } from '../providers/user-settings/user-settings';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    EliteApi,
-    UserSettings,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    ,EliteApi
+	,UserSettings
+	,SQLite
+    ,SqlStorage
   ]
 })
 export class AppModule {}

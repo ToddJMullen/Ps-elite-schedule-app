@@ -35,16 +35,21 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+	  // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+	  this.userSettings.initStorage()
+	  	// .then( () => this.rootPage = MyTeamsPage );//don't think we need this?
 	});
 	this.refreshFavs();
   }
 
   refreshFavs(){
 	  console.log("refreshFavs()")
-	  this.favoriteTeams = this.userSettings.getAllFavorites();
+	//   this.favoriteTeams = this.userSettings.getAllFavorites();
+		this.userSettings.getAllFavorites().then(
+			favAry => this.favoriteTeams = favAry
+		);
   }
 
   openPage(page) {

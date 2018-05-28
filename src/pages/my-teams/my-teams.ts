@@ -23,7 +23,8 @@ export class MyTeamsPage {
   }
 
   ionViewDidEnter(){//runs every time shown
-	  this.favoriteAry = this.userSettings.getAllFavorites()
+	//   this.favoriteAry = this.userSettings.getAllFavorites()
+		this.userSettings.getAllFavorites().then( favAry => this.favoriteAry = favAry );
 	}
 
 	ionViewDidLoad() {//runs only on load

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { EliteApi } from "../../providers/elite-api/elite-api";
-import { AgmCoreModule } from "@agm/core";
+import { AgmCoreModule } from "@agm/core";//defines map tags in markup
 
 declare var window:any;
 
