@@ -74,18 +74,18 @@ export class SqlStorage {
 			this.db = db;
 			db.executeSql("CREATE TABLE IF NOT EXISTS kv (key text primary key, value text)",[])
 			.then( data => {
-				let msg = `After created table / check:\n${JSON.stringify(data)}`;
+				let msg = `After created table / check: ${JSON.stringify(data)}`;
 				console.log( msg, data );
 				this.pop(msg);
 			})
 			.catch( err => {
-				let msg = `Failed to execute CREATE Table in SQLite DB:\n ${JSON.stringify(err)}`;
+				let msg = `Failed to execute CREATE Table in SQLite DB: ${JSON.stringify(err)}`;
 				console.error( msg, err );
 				this.pop(msg);
 			})
 		})
 		.catch( err => {
-			let msg = "Failed to initialize SQLite DB File:\n" + JSON.stringify(err)
+			let msg = `Failed to initialize SQLite DB File: ${JSON.stringify(err)}`
 			this.pop(msg);
 			console.error( msg, err );
 		});
